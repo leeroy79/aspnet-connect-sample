@@ -160,6 +160,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get tasks.
+        /// </summary>
+        internal static string Graph_GetTasks_Button {
+            get {
+                return ResourceManager.GetString("Graph_GetTasks_Button", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get tasks.
+        /// </summary>
+        internal static string Graph_GetTasks_Heading {
+            get {
+                return ResourceManager.GetString("Graph_GetTasks_Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the &lt;b&gt;Get tasks&lt;/b&gt; button to get the current user&apos;s tasks:.
+        /// </summary>
+        internal static string Graph_GetTasks_Instruction {
+            get {
+                return ResourceManager.GetString("Graph_GetTasks_Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;html&gt;&lt;head&gt;
         ///&lt;meta http-equiv=&apos;Content-Type&apos; content=&apos;text/html; charset=us-ascii&apos;&gt;
         ///&lt;title&gt;&lt;/title&gt;

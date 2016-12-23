@@ -161,6 +161,15 @@
     <value>Current user's email address</value>
     <comment>Label for email address result in Graph view</comment>
   </data>
+  <data name="Graph_GetTasks_Button" xml:space="preserve">
+    <value>Get tasks</value>
+  </data>
+  <data name="Graph_GetTasks_Heading" xml:space="preserve">
+    <value>Get tasks</value>
+  </data>
+  <data name="Graph_GetTasks_Instruction" xml:space="preserve">
+    <value>Choose the &lt;b&gt;Get tasks&lt;/b&gt; button to get the current user's tasks:</value>
+  </data>
   <data name="Graph_SendMail_Body_Content" xml:space="preserve">
     <value>&lt;html&gt;&lt;head&gt;
 &lt;meta http-equiv='Content-Type' content='text/html; charset=us-ascii'&gt;

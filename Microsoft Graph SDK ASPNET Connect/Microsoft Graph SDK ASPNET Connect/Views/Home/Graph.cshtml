@@ -42,6 +42,18 @@
             </div>
         </div>
 }
+
+<h2>@Resource.Graph_GetTasks_Heading</h2>
+<p>@Html.Raw(Resource.Graph_GetTasks_Instruction)</p>
+@using (Html.BeginForm("GetMyTasks", "Home"))
+{
+    <div class="col-sm-12">
+        <div class="form-group">
+            <button class="btn btn-default" id="get-my-email-address">@Resource.Graph_GetTasks_Button</button>
+        </div>
+    </div>
+}
+
 <div class="col-sm-12">
     <p class="@(ViewBag.Message == null ? "hidden" : null)">@Html.Raw(ViewBag.Message)</p>
 </div>
