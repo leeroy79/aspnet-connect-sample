@@ -109,7 +109,7 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
             };
         }
 
-        public async Task<IEnumerable<O365Task>> GetMyTasks(string accessToken)
+        public async Task<IEnumerable<TaskBase>> GetPlannerTasks(string accessToken)
         {
             string endpoint = "https://graph.microsoft.com/beta/me/tasks";
 
@@ -121,7 +121,7 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     using (HttpResponseMessage response = await client.SendAsync(request))
                     {
-                        var retVal = new List<O365Task>();
+                        var retVal = new List<TaskBase>();
 
                         if (response.StatusCode == HttpStatusCode.OK)
                         {
@@ -129,9 +129,9 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
 
                             dynamic results = JsonConvert.DeserializeObject<dynamic>(rawResponse);
 
-                            foreach(var task in results.value)
+                            foreach (var task in results.value)
                             {
-                                retVal.Add(new O365Task() { Title = task.title });
+                                retVal.Add(new TaskBase() { Title = task.title });
                             }
 
 
@@ -141,6 +141,35 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
                     }
                 }
             }
+        }
+
+
+
+        public async Task<IEnumerable<TaskBase>> GetOutlookTasks(string accessToken)
+        {
+            string endpoint = "https://outlook.office.com/api/v2.0/me/tasks";
+
+            using (var client = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Get, endpoint))
+                {
+                    request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                    using (HttpResponseMessage response = await client.SendAsync(request))
+                    {
+                        var retVal = new List<TaskBase>();
+
+                        if (response.StatusCode == HttpStatusCode.OK)
+                        {
+                            var rawResponse = await response.Content.ReadAsStringAsync();
+                        }
+
+                        return retVal;
+                    }
+                }
+            }
+
+
         }
     }
 }

@@ -87,15 +87,21 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Controllers
             {
                 string accessToken = await SampleAuthProvider.Instance.GetUserAccessTokenAsync();
 
-                var myTasks = await graphService.GetMyTasks(accessToken);
+                var myTasks = await graphService.GetPlannerTasks(accessToken);
 
                 var sb = new StringBuilder();
+
+                sb.AppendLine("Planner Tasks : <br/>");
 
                 foreach(var task in myTasks)
                 {
                     sb.Append(task.Title);
                     sb.AppendLine("<br/>");
                 }
+
+                sb.AppendLine("Outlook Tasks : <br/>");
+
+                myTasks = await graphService.GetOutlookTasks(accessToken);
 
                 ViewBag.Message = sb.ToString();
 
