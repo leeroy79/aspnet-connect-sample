@@ -185,6 +185,7 @@
     </Compile>
     <Compile Include="Models\GraphResources.cs" />
     <Compile Include="Models\GraphService.cs" />
+    <Compile Include="Models\O365Task.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="TokenStorage\SessionTokenCache.cs" />

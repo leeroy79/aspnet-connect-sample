@@ -49,8 +49,6 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
             }
         }
 
-
-
         // Send an email message from the current user.
         public async Task<string> SendEmail(string accessToken, MessageRequest email)
         {
@@ -111,9 +109,7 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
             };
         }
 
-
-
-        public async Task<string> GetMyTasks(string accessToken)
+        public async Task<IEnumerable<O365Task>> GetMyTasks(string accessToken)
         {
             string endpoint = "https://graph.microsoft.com/beta/me/tasks";
 
@@ -125,15 +121,20 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Models
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                     using (HttpResponseMessage response = await client.SendAsync(request))
                     {
-                        string retVal = string.Empty;
+                        var retVal = new List<O365Task>();
 
                         if (response.StatusCode == HttpStatusCode.OK)
                         {
-                            retVal = await response.Content.ReadAsStringAsync();
-                        }
-                        else
-                        {
-                            retVal = "Error, response code was " + response.StatusCode;
+                            var rawResponse = await response.Content.ReadAsStringAsync();
+
+                            dynamic results = JsonConvert.DeserializeObject<dynamic>(rawResponse);
+
+                            foreach(var task in results.value)
+                            {
+                                retVal.Add(new O365Task() { Title = task.title });
+                            }
+
+
                         }
 
                         return retVal;

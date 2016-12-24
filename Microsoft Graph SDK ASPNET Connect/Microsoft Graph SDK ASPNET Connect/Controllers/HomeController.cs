@@ -10,6 +10,7 @@ using Microsoft_Graph_SDK_ASPNET_Connect.Helpers;
 using Microsoft_Graph_SDK_ASPNET_Connect.Models;
 using Resources;
 using System;
+using System.Text;
 
 namespace Microsoft_Graph_SDK_ASPNET_Connect.Controllers
 {
@@ -85,7 +86,18 @@ namespace Microsoft_Graph_SDK_ASPNET_Connect.Controllers
             try
             {
                 string accessToken = await SampleAuthProvider.Instance.GetUserAccessTokenAsync();
-                ViewBag.Message = await graphService.GetMyTasks(accessToken);
+
+                var myTasks = await graphService.GetMyTasks(accessToken);
+
+                var sb = new StringBuilder();
+
+                foreach(var task in myTasks)
+                {
+                    sb.Append(task.Title);
+                    sb.AppendLine("<br/>");
+                }
+
+                ViewBag.Message = sb.ToString();
 
                 return View("Graph");
             }
